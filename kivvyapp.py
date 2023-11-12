@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.textinput import TextInput
 
 from kivy.uix.screenmanager import Screen, ScreenManager
 
@@ -58,11 +59,19 @@ class SecondScr(Screen):
         super().__init__ (name = name)
         secondscr = Label (text = "second Screen")
         goback = Button(text = "back", font_size = 15)
+        btn2 = Button(text = "btn2", font_size = 15)
+        textinput = TextInput(text='Hello world')
+        textinput.size_hint = (1,0.2)
+        textinput.pos_hint = {"center_x":0.5, "center_y":0.5}
         goback.on_press = self.back
 
         self.vertical = BoxLayout(orientation = "vertical", padding = 5, spacing = 5)
+        self.btns = BoxLayout(orientation = "horizontal", padding = 5, spacing = 5, size_hint=(1,0.5), pos_hint = {"center_x":0.5, "y":0})
         self.vertical.add_widget (secondscr)
-        self.vertical.add_widget(goback)
+        self.btns.add_widget (goback)
+        self.btns.add_widget (btn2)
+        self.vertical.add_widget(textinput)
+        self.vertical.add_widget(self.btns)
         self.add_widget(self.vertical)
     
     def back(self):
